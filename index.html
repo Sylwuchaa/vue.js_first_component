@@ -13,56 +13,80 @@
 <body>
     <div class="container align-items-center">
         <div id="app-counter">
-            <div class="alert alert-primary text-center" role="alert" v-show="!inProgress">
-                Wciśnij
-                <b>START</b>, aby rozpocząć odliczanie.
-            </div>
-            <div class="row align-items-center" style="height: 50px;">
-                <div class="col text-center">
-                    <p style="font-size: 50px; margin-top:100px;">
-                        <b>{{counter}}</b>
-                    </p>
-                        <button type="button" class="btn btn-primary" @click="start" :disabled="inProgress">Start</button>
-                </div>
-            </div>
+
+            <syl-counter></syl-counter>
+            <syl-counter style="margin-top: 80px;"></syl-counter>
+        
+            
         </div>
-    </div>
-
-
-
-
-
     </div>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
 <script>
-    new Vue({
-        el: "#app-counter",
-        data: {
-            counter: 10,
-            inProgress: false
+    Vue.component("syl-counter", {
+        template: `
+            <div>
+                <div class="alert alert-primary text-center" role="alert" v-show="!inProgress">
+                    <p>Wciśnij <b>START</b>, aby rozpocząć odliczanie.</p>
+                </div>
+                <div class="row aligin-items-center" style="height: 50px;">
+                    <div class="col text-center">
+                        <p style="font-size: 50px;"><b>{{counter}}</b></p>
+                        <button type="button" class="btn btn-primary" @click="start" :disabled="inProgress">Start</button>
+                    </div>    
+                </div>    
+            </div>
+        `,
+
+        data: function () {
+            return {
+                    counter: 10,
+                    inProgress: false
+                 };
+
         },
         methods: {
-            start: function() {
+            start: function () {
                 this.inProgress = true;
                 this.countdown();
             },
-            countdown: function() {
+            countdown: function () {
 
                 this.counter--;
 
-                if(this.counter > 0) {
+                if (this.counter > 0) {
                     setTimeout(this.countdown, 1000);
                 } else {
                     setTimeout(() => {
-                      this.counter = 10;
-                      this.inProgress = false;             
+                        this.counter = 10;
+                        this.inProgress = false;
                     }, 1000);
                 }
             }
 
         }
+        
+    });
+    new Vue ({
+        el: "#app-counter",
+        data: {
+
+
+        }
+
+
+
+
     });
 </script>
 
 </html>
+
+
+
+
+
+
+
+
+
