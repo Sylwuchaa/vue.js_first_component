@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <title>Vue.js my first component</title>
+</head>
+
+<body>
+    <div class="container align-items-center">
+        <div id="app-counter">
+            <div class="alert alert-primary text-center" role="alert" v-show="!inProgress">
+                Wciśnij
+                <b>START</b>, aby rozpocząć odliczanie.
+            </div>
+            <div class="row align-items-center" style="height: 50px;">
+                <div class="col text-center">
+                    <p style="font-size: 50px; margin-top:100px;">
+                        <b>{{counter}}</b>
+                    </p>
+                        <button type="button" class="btn btn-primary" @click="start" :disabled="inProgress">Start</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
+<script>
+    new Vue({
+        el: "#app-counter",
+        data: {
+            counter: 10,
+            inProgress: false
+        },
+        methods: {
+            start: function() {
+                this.inProgress = true;
+                this.countdown();
+            },
+            countdown: function() {
+
+                this.counter--;
+
+                if(this.counter > 0) {
+                    setTimeout(this.countdown, 1000);
+                } else {
+                    this.counter = 10;
+                    this.inProgress = false;
+                }
+            }
+
+        }
+    });
+</script>
+
+</html>
