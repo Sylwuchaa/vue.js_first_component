@@ -13,19 +13,20 @@
 <body>
     <div class="container align-items-center">
         <div id="app-counter">
-
-            <syl-counter></syl-counter>
-            <syl-counter style="margin-top: 80px;"></syl-counter>
-            <syl-counter style="margin-top: 80px;"></syl-counter>
-       
-        
-            
-        </div>
+            <syl-counter :init-value="15"></syl-counter>
+            <syl-counter :init-value="5" style="margin-top: 80px;"></syl-counter>
+            <syl-counter :init-value="10" style="margin-top: 80px;"></syl-counter>
+        </div>  
     </div>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
 <script>
-    Vue.component("syl-counter", {
+
+
+
+
+    var Counter = {
+        
         template: `
             <div>
                 <div class="alert alert-primary text-center" role="alert" v-show="!inProgress">
@@ -39,10 +40,10 @@
                 </div>    
             </div>
         `,
-
+        props: ["initValue"],  
         data: function () {
             return {
-                    counter: 10,
+                    counter: this.initValue,
                     inProgress: false
                  };
 
@@ -60,24 +61,24 @@
                     setTimeout(this.countdown, 1000);
                 } else {
                     setTimeout(() => {
-                        this.counter = 10;
+                        this.counter = this.initValue;
                         this.inProgress = false;
                     }, 1000);
                 }
             }
 
-        }
+        },
+    // life cycle hook methods
+    //  created() {
+    //     this.counter = this.initValue;
+    // }
         
-    });
+    };
     new Vue ({
         el: "#app-counter",
-        data: {
-
-
-        }
-
-
-
+        components: {
+            "syl-counter": Counter
+        }    
 
     });
 </script>
